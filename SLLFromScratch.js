@@ -136,7 +136,30 @@ class SLL {
 
     // Move the smallest number to the front of the singly linked list
     moveMinToFront() {
+      
+      if(this.head === null){
+        return this;
+      }
+      let min = this.head;
+      let runner = this.head.next;
+      let walker = this.head;
+      let previous = null;
 
+      while(runner !== null){
+        if(runner.value < min.value){
+          min = runner;
+          previous = walker;
+          
+        }
+        runner = runner.next;
+        walker = walker.next;
+
+      }
+      if(min == this.head) {
+        return this;
+      }
+      previous.next = min.next;
+      this.addToFront(min.value);
     }
 
     // Remove the first node with the given value from the list
@@ -180,15 +203,17 @@ class SLL {
 }
 
 const list = new SLL();
-list.addToBack(2).addToBack(3).addToBack(4).printList();
+list.addToBack(2).addToBack(3).addToBack(4).addToBack(1).printList();
 // list.addToFront(2);
 // list.addToFront(1);
 // list.addToFront(0);
 // list.printList();
 // list.rContains(5);
-list.removeFromBack();
-list.printList();
-list.removeFromBack();
-list.printList();
-list.removeFromBack();
+// list.removeFromBack();
+// list.printList();
+// list.removeFromBack();
+// list.printList();
+// list.removeFromBack();
+// list.printList();
+list.moveMinToFront();
 list.printList();
