@@ -8,6 +8,7 @@ class Node {
 class SLL {
     constructor() {
         this.head = null;
+        this.size = 0;
     }
 
     // Print the whole list
@@ -25,7 +26,11 @@ class SLL {
         console.log("END =================================")
         return this;
       }
-
+    getSize() {
+      console.log(`Sll size is: ${this.size} nodes.`);
+      
+      return this;
+    }
     // Is the list empty?
     isEmpty() {
       
@@ -42,6 +47,7 @@ class SLL {
     addToBack(value) {
       if(this.head === null){
         this.head = new Node(value);
+        this.size++;
         return this;
       }
       let runner = this.head;
@@ -50,6 +56,7 @@ class SLL {
         }
 
       runner.next = new Node(value);
+      this.size++;
       return this;
 
     }
@@ -59,6 +66,7 @@ class SLL {
     
         if (this.head === null) {
           this.head = new Node(value);
+          this.size++;
           return this;
         }
         
@@ -67,7 +75,7 @@ class SLL {
         newHead.next = this.head;
         
         this.head = newHead;
-        
+        this.size++;
         return this;
       }
 
@@ -76,9 +84,11 @@ class SLL {
       // let runner = this.head;
       if (this.head === null) {
         this.head = new Node(value);
+        this.size--;
         return this;
       }
       this.head = this.head.next;
+      this.size--;
       return this;
 
     }
@@ -118,19 +128,21 @@ class SLL {
         return this;
       } else if (this.head.next === null) {
         this.head = null;
+        this.size--;
         return this;
       }
-
+      
       let runner = this.head.next;
       let walker = this.head;
-
+      
       while (runner.next !== null) {
         runner = runner.next;
         walker = walker.next;
       }
-
+      
       walker.next = null;
       
+      this.size--;
       return this;
     }
 
@@ -170,6 +182,7 @@ class SLL {
 
       if (this.head.value === value) {
         this.head = this.head.next;
+        this.size--;
         console.log("head was our value to remove");
         return this;
       }
@@ -182,13 +195,14 @@ class SLL {
           walker.next = runner.next;
           
           console.log("removing value");
+          this.size--;
           return this;
         }
-
+        
         runner = runner.next;
         walker = walker.next;
       }
-
+      
       console.log("nothing found");
       
       return this;
@@ -216,7 +230,24 @@ class SLL {
       if(this.head === null){
         return this;
       }
-
+      if(this.size < n){
+        console.log("too short list");
+        return this;
+      }
+      let runner = this.head;
+      let walker = this.head;
+      let count = 0;
+      while(count < n){
+        runner = runner.next;
+        count++;
+        
+      }
+      while(runner !== null){
+        runner = runner.next;
+        walker = walker.next;
+      }
+      console.log("walker", walker);
+      return walker.value;
     }
 
     // Write an algorithm that, given a second SLL, concatenates it to the end of another SLL
@@ -250,7 +281,8 @@ class SLL {
 }
 
 const list = new SLL();
-list.addToBack(2).addToBack(3).addToBack(4).addToBack(1).printList();
+// list.addToBack(2).addToBack(3).addToBack(4).addToBack(1).addToBack(5).addToBack(6).addToBack(7).addToBack(8).printList();
+list.addToBack(2).addToBack(3).printList().getSize();
 // list.addToFront(2);
 // list.addToFront(1);
 // list.addToFront(0);
@@ -266,5 +298,6 @@ list.addToBack(2).addToBack(3).addToBack(4).addToBack(1).printList();
 // list.printList();
 // list.removeVal(4);
 // list.printList();
-console.log(list.secondToLast());
+//console.log(list.secondToLast());
+list.nValueToLast(3);
 // list.printList();
