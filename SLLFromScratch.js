@@ -164,11 +164,58 @@ class SLL {
 
     // Remove the first node with the given value from the list
     removeVal(value) {
-        
+      if (this.head === null){
+        return this;
+      }
+
+      if (this.head.value === value) {
+        this.head = this.head.next;
+        console.log("head was our value to remove");
+        return this;
+      }
+      
+      let runner = this.head.next;
+      let walker = this.head;
+      
+      while (runner !== null) {
+        if (runner.value === value) {
+          walker.next = runner.next;
+          
+          console.log("removing value");
+          return this;
+        }
+
+        runner = runner.next;
+        walker = walker.next;
+      }
+
+      console.log("nothing found");
+      
+      return this;
     }
 
     // Write an algorithm that returns the second-to-last value of a Singly Linked List
     secondToLast(){
+      if (this.head === null){
+        return this;
+      }
+      let runner = this.head.next;
+      let walker = this.head;
+      while(runner !== null){
+        if(runner.next == null){
+          return walker.value;
+        }
+        runner = runner.next;
+        walker = walker.next
+      }
+      return this;
+    }
+
+
+    nValueToLast(n){
+      if(this.head === null){
+        return this;
+      }
 
     }
 
@@ -215,5 +262,9 @@ list.addToBack(2).addToBack(3).addToBack(4).addToBack(1).printList();
 // list.printList();
 // list.removeFromBack();
 // list.printList();
-list.moveMinToFront();
-list.printList();
+// list.moveMinToFront();
+// list.printList();
+// list.removeVal(4);
+// list.printList();
+console.log(list.secondToLast());
+// list.printList();
