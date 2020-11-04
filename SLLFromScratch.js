@@ -252,11 +252,59 @@ class SLL {
 
     // Write an algorithm that, given a second SLL, concatenates it to the end of another SLL
     concat(list2) {
+      if(this.head === null){
+        return this;
+      }
+      let runner = this.head;
+      while(runner.next !== null){
+        runner = runner.next;
+      }
 
+      runner.next = list2.head;
+      return this;
     }
-
+    //list1
+    //1 3 4 5 7 11 12
+    //list2
+    //2 6 8 9 10 13 14 15
     // Write an algorithm that, assuming this list is sorted, will merge it together with another passed in SLL
     merge(list2) {
+      let runner;
+      let runner2;
+      if(this.head.value < list2.head.value){
+        runner = this.head;
+        runner2 = list2.head;
+      } else {
+        runner = list2.head;
+        runner2 = this.head;
+      }
+      while(runner != null){
+        //if list2 is longer
+        if(runner.next === null){
+            runner.next = runner2
+            return this;
+        }
+        //TODO: if list1 is longer
+        if(runner2.next === null){
+            runner.next = runner2
+            return this;
+        }
+
+        if(runner.next.value > runner2.value){
+          let temp = runner.next;
+          let temp2 = runner2.next;
+          runner.next = runner2;
+          runner2.next = temp;
+          runner2 = temp2;
+
+          runner = runner.next;
+        }
+        else{
+          runner = runner.next;
+        }
+      }
+      
+      return this;
 
     }
 
@@ -281,8 +329,10 @@ class SLL {
 }
 
 const list = new SLL();
+const list2 = new SLL();
 // list.addToBack(2).addToBack(3).addToBack(4).addToBack(1).addToBack(5).addToBack(6).addToBack(7).addToBack(8).printList();
-list.addToBack(2).addToBack(3).printList().getSize();
+list.addToBack(1).addToBack(3).printList();
+list2.addToBack(2).addToBack(4).addToBack(5).addToBack(6).addToBack(7).printList();
 // list.addToFront(2);
 // list.addToFront(1);
 // list.addToFront(0);
@@ -299,5 +349,7 @@ list.addToBack(2).addToBack(3).printList().getSize();
 // list.removeVal(4);
 // list.printList();
 //console.log(list.secondToLast());
-list.nValueToLast(3);
+// list.nValueToLast(3);
 // list.printList();
+// list.concat(list2).printList();
+list.merge(list2).printList();
