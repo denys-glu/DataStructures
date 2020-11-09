@@ -266,7 +266,6 @@ class SLL {
 
     // Write an algorithm that, assuming this list is sorted, will merge it together with another passed in SLL
     merge(list2) {
-
       if(list2.head.value < this.head.value) {
         let temp = this.head;
         this.head = list2.head;
@@ -301,8 +300,13 @@ class SLL {
     }
 
     // Write an algorithm that, assuming all lists are sorted, will merge together k number of sorted SLL's [list1, list2, list3, list4, ..., listk]
-    mergeK(arrayoflists) {
+    mergeK(arrayOfLists) {
 
+      for (let i = 0; i < arrayOfLists.length; i++) {
+        this.merge(arrayOfLists[i])
+      }
+
+      return this;
     }
 
     // Write an algorithm that will reverse a singly linked list.
@@ -311,7 +315,24 @@ class SLL {
 
     // Three Pointer Method
     reversePointers() {
+      if (this.head === null) return this;
 
+      let previous = null;
+      let walker = this.head;
+      let runner = this.head.next;
+
+      while (runner !== null) {
+        walker.next = previous;
+        
+        previous = walker
+        walker = runner
+        runner = runner.next
+        
+      }
+      
+      walker.next = previous
+      this.head = walker;
+      return this;
     }
 
     // Recursive Method
@@ -322,9 +343,14 @@ class SLL {
 
 const list = new SLL();
 const list2 = new SLL();
+const list3 = new SLL();
+const list4 = new SLL();
 // list.addToBack(2).addToBack(3).addToBack(4).addToBack(1).addToBack(5).addToBack(6).addToBack(7).addToBack(8).printList();
-list.addToBack(2).addToBack(3).addToBack(5).addToBack(7)
-list2.addToBack(1).addToBack(4).addToBack(6)
+list.addToBack(2).addToBack(3).addToBack(5).addToBack(7);
+list2.addToBack(1).addToBack(4).addToBack(6);
+list3.addToBack(8).addToBack(9).addToBack(10);
+list4.addToBack(11).addToBack(12).addToBack(13);
+list.reversePointers().printList();
 // list.addToFront(2);
 // list.addToFront(1);
 // list.addToFront(0);
@@ -344,4 +370,4 @@ list2.addToBack(1).addToBack(4).addToBack(6)
 // list.nValueToLast(3);
 // list.printList();
 // list.concat(list2).printList();
-list.merge(list2).printList();
+// list.mergeK([list2,list3,list4]).printList();
