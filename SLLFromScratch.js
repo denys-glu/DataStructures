@@ -337,7 +337,14 @@ class SLL {
 
     // Recursive Method
     reverseR(runner = this.head, prev = null) {
+      if(runner === null){
+        this.head = prev;
+        return this;
+      } 
 
+      this.reverseR(runner.next, runner);
+      runner.next = prev;
+      return this;
     }
 }
 
@@ -350,7 +357,8 @@ list.addToBack(2).addToBack(3).addToBack(5).addToBack(7);
 list2.addToBack(1).addToBack(4).addToBack(6);
 list3.addToBack(8).addToBack(9).addToBack(10);
 list4.addToBack(11).addToBack(12).addToBack(13);
-list.reversePointers().printList();
+list.reverseR().printList();
+// list.reversePointers().printList();
 // list.addToFront(2);
 // list.addToFront(1);
 // list.addToFront(0);
