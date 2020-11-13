@@ -469,13 +469,17 @@ class QueueOfStacks {
     }
 
     enQueue(value) {
+
         while(!this.stack_1.isEmpty()) {
             this.stack_2.push(this.stack_1.pop().value);
         }
+
         this.stack_1.push(value);
+
         while(!this.stack_2.isEmpty()) {
             this.stack_1.push(this.stack_2.pop().value);
         }
+        
         return this;
     }
 
