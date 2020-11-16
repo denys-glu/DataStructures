@@ -31,6 +31,19 @@ class DLList {
 
     // Push to the end of the current DLList
     push(value) {
+        if(this.head == null){
+            this.head = new DLNode(value);
+            return this;
+        }
+        let walker = this.head;
+        while(walker.next != null){
+            walker = walker.next;
+        }
+        walker.next = new DLNode(value);
+        walker.next.prev = walker;
+        // console.log(walker);
+        // console.log(walker.next)
+        return this;
 
     }
 
@@ -58,3 +71,8 @@ class DLList {
 
     }
 }
+
+const list = new DLList();
+list.push(4).printList();
+list.push(1).printList();
+list.push(3).printList();
