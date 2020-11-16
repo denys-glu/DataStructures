@@ -72,7 +72,20 @@ class DLList {
     
     // Remove a specific value from a DLList
     remove(value) {
-      
+      if(this.head == null){
+          return this;
+      }
+      let runner = this.head;
+      while(runner.next.value != value){
+          runner = runner.next;
+      }
+    //   console.log("runner", runner);
+    //   console.log("runner.next", runner.next);
+    //   console.log("runner.next.next", runner.next.next);
+      runner.next = runner.next.next;
+      runner.next.prev = runner;
+
+      return this;
     }
 
 
@@ -92,4 +105,6 @@ const list = new DLList();
 list.push(4).printList();
 list.push(1).printList();
 list.push(3).printList();
-list.pop().pop().pop().printList();
+// list.pop().pop().pop().printList();
+list.remove(1).printList();
+list.remove(3).printList();
