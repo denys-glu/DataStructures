@@ -50,7 +50,23 @@ class DLList {
 
     // Remove the last element of the DLList
     pop() {
+        if(this.head == null){
+            return this;
+        }
+        let runner = this.head;
+        if(this.head.next == null){
+            this.head = null;
+            return this;
+        }
+        while(runner.next != null){
+            
+            runner = runner.next;
 
+        }
+
+        runner.prev.next = null;
+        runner.prev = null;
+        return this;
     }
 
     
@@ -76,3 +92,4 @@ const list = new DLList();
 list.push(4).printList();
 list.push(1).printList();
 list.push(3).printList();
+list.pop().pop().pop().printList();
