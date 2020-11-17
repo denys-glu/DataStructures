@@ -131,7 +131,18 @@ class DLList {
 
     // Write an algorithm that will pre-pend a node into a DLL. Basically, addToFront
     prepend(value) {
+        //if list is empty
+        if(this.head == null){
+            this.head = new DLNode(value)
+        }
+        let newHead = new DLNode(value)
+        let oldHead = this.head;
 
+        this.head = newHead;
+
+        oldHead.prev = newHead;
+        newHead.next = oldHead;
+        return this
     }
 
 
@@ -148,4 +159,6 @@ list.push(3).printList();
 // list.pop().pop().pop().printList();
 // list.remove(1).printList();
 // list.remove(3).printList();
-list.remove(4).printList();
+// list.remove(4).printList();
+list.prepend(0).printList();
+list.prepend(100).printList();
