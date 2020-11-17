@@ -72,8 +72,48 @@ class DLList {
     
     // Remove a specific value from a DLList
     remove(value) {
+    // if the list is empty
       if(this.head == null){
           return this;
+      }
+      
+      else if(this.head.value == value){
+        let temp = this.head;
+          this.head = this.head.next;
+          this.head.prev = null;
+          temp.next = null;
+          return this;
+      }
+      //if there is only one node
+      else if(this.head.next == null){
+          if(this.head.value == value){
+              
+                this.head = null;
+                return this;
+          }
+          else{
+              console.log("value not found");
+              return this;
+          }
+      }
+      //if there is only 2 nodes
+      else if(this.head.next.next == null){
+          if(this.head.value == value){
+            
+              this.head.next = this.head;
+              this.head.prev = null;
+              return this;
+          }
+          if(this.head.next.value == value){
+            this.head.next = null;
+            
+            return this;
+            }
+        else{
+            console.log("value not found")
+            return this;
+        }
+
       }
       let runner = this.head;
       while(runner.next.value != value){
@@ -106,5 +146,6 @@ list.push(4).printList();
 list.push(1).printList();
 list.push(3).printList();
 // list.pop().pop().pop().printList();
-list.remove(1).printList();
-list.remove(3).printList();
+// list.remove(1).printList();
+// list.remove(3).printList();
+list.remove(4).printList();
